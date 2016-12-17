@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>ur_rangefinder_driver</name>
+  <version>0.0.1</version>
+  <description>The rangefinder driver package originally created for the Unior project</description>
+  <url type="website">https://github.com/avrora-robotics/ur_rangefinder_driver</url>
+
+  <license>BSD3</license>
+
+  <maintainer email="elisabethsh08@gmail.com">Elizaveta Shaposhnikova</maintainer>
+  <author email="elisabethsh08@gmail.com">Elizaveta Shaposhnikova</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>serial</build_depend>
+
+  <run_depend>roscpp</run_depend>
+
+</package>
