@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find ur_rangefinder_driver)/launch/ur_rangefinder_driver.launch" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ur_rangefinder_driver)/rviz_cfg/rangefinder_demo.rviz"/>
+
+</launch>
