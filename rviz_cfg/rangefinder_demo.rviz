@@ -8,7 +8,6 @@ Panels:
         - /Status1
         - /Grid1
         - /Range1
-        - /Range1/Status1
       Splitter Ratio: 0.5
     Tree Height: 463
   - Class: rviz/Selection
@@ -54,17 +53,65 @@ Visualization Manager:
     - Alpha: 0.5
       Buffer Length: 8
       Class: rviz/Range
-      Color: 255; 124; 98
+      Color: 255; 0; 0
       Enabled: true
       Name: Range
       Queue Size: 100
       Topic: /range
       Unreliable: false
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_link:
+          Value: true
+        rangefinder_1:
+          Value: true
+        rangefinder_2:
+          Value: true
+        rangefinder_3:
+          Value: true
+        rangefinder_4:
+          Value: true
+        rangefinder_5:
+          Value: true
+        rangefinder_6:
+          Value: true
+        rangefinder_7:
+          Value: true
+        rangefinder_8:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        base_link:
+          rangefinder_1:
+            {}
+          rangefinder_2:
+            {}
+          rangefinder_3:
+            {}
+          rangefinder_4:
+            {}
+          rangefinder_5:
+            {}
+          rangefinder_6:
+            {}
+          rangefinder_7:
+            {}
+          rangefinder_8:
+            {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: world
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -84,25 +131,20 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 10
+      Angle: 0
+      Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
-      Focal Shape Fixed Size: true
-      Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.56979632
+      Scale: 160
       Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
-      Yaw: 0.0103985537
+      Value: TopDownOrtho (rviz)
+      X: 0.270832986
+      Y: -0.22499992
     Saved: ~
 Window Geometry:
   Displays:
