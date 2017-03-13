@@ -7,8 +7,8 @@
 
 struct RangefinderPacket
 {
-  float ranges[4];
-  uint8_t offset;
+  float ranges[4] = {0};
+  uint8_t offset = 0;
 };
 
 class RangefinderNode
@@ -26,6 +26,10 @@ private:
 
   static constexpr uint8_t PREAMBLE[PREAMBLE_SIZE] = { 0x0A, 0x0D };
   static constexpr uint8_t ENDING[ENDING_SIZE] = { 0xFA, 0xFA };
+
+  static constexpr float MINIMUM_RANGE_VALUE = 0;
+  static constexpr float MAXIMUM_RANGE_VALUE = 2.5;
+  static constexpr uint8_t NO_SENSOR_CONNECTED = 0xF0;
 
   std::shared_ptr<serial::Serial> serial_port_;
   RangefinderPacket current_packet_;

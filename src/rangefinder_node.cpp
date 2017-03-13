@@ -32,7 +32,15 @@ void RangefinderNode::update()
     }
 
     if (current_packet_size < PREAMBLE_SIZE + DATA_SIZE) {
-      current_packet_.ranges[current_packet_size - PREAMBLE_SIZE] = static_cast<float>(current_byte) * 0.1;
+      float range_value = static_cast<float>(current_byte) * 0.1;
+
+      if (current_byte == NO_SENSOR_CONNECTED) {
+        range_value = current_byte;
+      } else if (range_value > MAXIMUM_RANGE_VALUE) {
+        range_value = MAXIMUM_RANGE_VALUE;
+      }
+
+      current_packet_.ranges[current_packet_size - PREAMBLE_SIZE] = range_value;
       current_packet_size++;
 
       continue;
@@ -60,7 +68,13 @@ void RangefinderNode::update()
 void RangefinderNode::sendCurrentPacket()
 {
   for (size_t range = 0; range < DATA_SIZE; ++range) {
-    sendRangeMessage(current_packet_.offset * DATA_SIZE + range + 1, current_packet_.ranges[range]);
+    uint8_t index = current_packet_.offset * DATA_SIZE + range + 1;
+    if (current_packet_.ranges[range] == NO_SENSOR_CONNECTED) {
+      ROS_WARN_STREAM(ros::this_node::getName() << "Rangefinder #" << index << " is not connected");
+      continue;
+    }
+
+    sendRangeMessage(index, current_packet_.ranges[range]);
   }
 }
 
@@ -70,8 +84,8 @@ void RangefinderNode::sendRangeMessage(size_t rangefinder_index, float data)
   message.header.stamp = ros::Time::now();
   message.header.frame_id = "rangefinder_" + std::to_string((uint8_t)rangefinder_index);
 
-  message.min_range = 0;
-  message.max_range = 2.5;
+  message.min_range = MINIMUM_RANGE_VALUE;
+  message.max_range = MAXIMUM_RANGE_VALUE;
 
   message.field_of_view = 10 * M_PI / 180.0; // approx 10 degrees
   message.radiation_type = sensor_msgs::Range::ULTRASOUND;
