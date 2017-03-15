@@ -69,8 +69,10 @@ void RangefinderNode::sendCurrentPacket()
 {
   for (uint8_t range = 0; range < DATA_SIZE; ++range) {
     uint8_t index = current_packet_.offset * DATA_SIZE + range + 1;
+
     if (current_packet_.ranges[range] == NO_SENSOR_CONNECTED) {
       ROS_WARN_STREAM(ros::this_node::getName() << "Rangefinder #" << index << " is not connected");
+      sendRangeMessage(index, MAXIMUM_RANGE_VALUE);
       continue;
     }
 
