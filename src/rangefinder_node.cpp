@@ -16,7 +16,7 @@ void RangefinderNode::update()
     return;
   }
 
-  static size_t current_packet_size = 0;
+  static uint8_t current_packet_size = 0;
   while (bytes_available--) {
     uint8_t current_byte;
     serial_port_->read(&current_byte, 1);
@@ -67,7 +67,7 @@ void RangefinderNode::update()
 
 void RangefinderNode::sendCurrentPacket()
 {
-  for (size_t range = 0; range < DATA_SIZE; ++range) {
+  for (uint8_t range = 0; range < DATA_SIZE; ++range) {
     uint8_t index = current_packet_.offset * DATA_SIZE + range + 1;
     if (current_packet_.ranges[range] == NO_SENSOR_CONNECTED) {
       ROS_WARN_STREAM(ros::this_node::getName() << "Rangefinder #" << index << " is not connected");
@@ -78,7 +78,7 @@ void RangefinderNode::sendCurrentPacket()
   }
 }
 
-void RangefinderNode::sendRangeMessage(size_t rangefinder_index, float data)
+void RangefinderNode::sendRangeMessage(uint8_t rangefinder_index, float data)
 {
   sensor_msgs::Range message;
   message.header.stamp = ros::Time::now();
